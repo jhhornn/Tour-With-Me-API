@@ -6,7 +6,10 @@ dotenv.config({ path: './config/.env' });
 const MONGODB_URI =
   process.env.NODE_ENV === 'test'
     ? process.env.TEST_MONGODB_URI
-    : process.env.MONGODB_URI || 'mongodb://0.0.0.0:27017/tour';
+    : process.env.MONGODB_URI.replace(
+        '<password>',
+        process.env.DATABASE_PASSWORD
+      ) || 'mongodb://0.0.0.0:27017/tour';
 
 const connectDB = async () => {
   await mongoose
