@@ -18,6 +18,18 @@ class APIFeatures {
 
     return this;
   }
+
+  sort() {
+    if (this.queryString.sort) {
+      const sortBy = this.queryString.sort.split(',').join(' ');
+      this.query = this.query.sort(sortBy);
+      // .sort('price rating').
+    } else {
+      this.query = this.query.sort('-createdAt');
+    }
+
+    return this;
+  }
 }
 
 module.exports = APIFeatures;
