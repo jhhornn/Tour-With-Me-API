@@ -41,6 +41,21 @@ class APIFeatures {
 
     return this;
   }
+
+  paginate() {
+    const page = this.queryString.page * 1 || 1;
+    const limit = this.queryString.limit * 1 || 100;
+    const skip = (page - 1) * limit;
+
+    this.query = this.query.skip(skip).limit(limit);
+
+    return this;
+    // if (this.queryString.page) {
+    //   const numOfTours = await this.query.countDocuments();
+
+    //   if (skip >= numOfTours) throw new Error('This page does not exist');
+    // }
+  }
 }
 
 module.exports = APIFeatures;
