@@ -81,6 +81,12 @@ const tourSchema = new mongoose.Schema(
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
+// A vitual field that is not saved to the database but is called
+// and included in the result everytime the DB is queried for it data
+tourSchema.virtual('durationWeeks').get(function () {
+  return this.duration / 7;
+});
+
 const Tour = mongoose.model('Tour', tourSchema);
 
 module.exports = Tour;
